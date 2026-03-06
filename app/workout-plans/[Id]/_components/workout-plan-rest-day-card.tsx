@@ -1,5 +1,5 @@
 ﻿import Link from "next/link";
-import { BedDouble, Calendar, Zap } from "lucide-react";
+import { Calendar, Zap } from "lucide-react";
 
 type WorkoutPlanRestDayCardProps = {
   workoutPlanId: string;
@@ -39,8 +39,8 @@ export function WorkoutPlanRestDayCard({
 
       <div className="flex items-center justify-between gap-3">
         <div id="mudeAqui" className="flex items-center gap-3">
-          <div className="text-muted-foreground ">
-            <Zap id="outroIcone" className="size-5 text-blue-600" />
+          <div className="text-muted-foreground">
+            <Zap id="outroIcone" className="size-5" />
           </div>
           <h3 className="font-heading text-2xl font-semibold leading-[1.05] text-foreground">
             Dia de descanso

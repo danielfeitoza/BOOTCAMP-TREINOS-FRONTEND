@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -31,7 +31,7 @@ const NAV_ITEMS: {
     isWorkoutPlanRoute: true,
   },
   { icon: Sparkles, href: "#", label: "AI", isCenter: true },
-  { icon: ChartNoAxesColumn, href: "#", label: "Estatísticas" },
+  { icon: ChartNoAxesColumn, href: "/stats", label: "Estatísticas" },
   { icon: UserRound, href: "#", label: "Perfil" },
 ];
 
