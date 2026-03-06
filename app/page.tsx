@@ -7,7 +7,6 @@ import {
 } from "./_lib/api/fetch-generated";
 import dayjs from "dayjs";
 import Image from "next/image";
-import Link from "next/link";
 
 import { BottomNavbar } from "@/components/bottom-navbar";
 import { WorkoutDayCard } from "@/components/workout-day-card";
@@ -100,19 +99,17 @@ export default async function Home() {
         </div>
 
         {data?.todayWorkoutDay ? (
-          <Link
-            href={`/workout-plans/${data.todayWorkoutDay.workoutPlanId}/workout-days/${data.todayWorkoutDay.id}`}
-          >
-            <WorkoutDayCard
-              name={data.todayWorkoutDay.name}
-              weekDay={data.todayWorkoutDay.weekDay}
-              estimatedDurationInSeconds={
-                data.todayWorkoutDay.estimatedDurationInSeconds
-              }
-              exercisesCount={data.todayWorkoutDay.exercisesCount}
-              coverImageUrl={data.todayWorkoutDay.coverImageUrl}
-            />
-          </Link>
+          <WorkoutDayCard
+            workoutPlanId={data.todayWorkoutDay.workoutPlanId}
+            workoutDayId={data.todayWorkoutDay.id}
+            name={data.todayWorkoutDay.name}
+            weekDay={data.todayWorkoutDay.weekDay}
+            estimatedDurationInSeconds={
+              data.todayWorkoutDay.estimatedDurationInSeconds
+            }
+            exercisesCount={data.todayWorkoutDay.exercisesCount}
+            coverImageUrl={data.todayWorkoutDay.coverImageUrl}
+          />
         ) : (
           <div className="flex h-50 items-center justify-center rounded-xl border border-border">
             <p className="font-heading text-sm text-muted-foreground">
@@ -126,4 +123,3 @@ export default async function Home() {
     </div>
   );
 }
-

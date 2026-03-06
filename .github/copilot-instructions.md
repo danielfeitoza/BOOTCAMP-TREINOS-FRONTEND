@@ -84,6 +84,9 @@ NEXT_PUBLIC_BASE_URL=http://localhost:3000  # URL do frontend
 - Use componentes da biblioteca shadcn/ui o máximo possível (veja https://ui.shadcn.com/).
 - Crie componentes e funções reutilizáveis para reduzir duplicidade.
 - **NUNCA** crie mais de um componente no mesmo arquivo. Cada componente deve ter seu próprio arquivo.
+- Para componentes específicos de uma página/rota, **SEMPRE** criar dentro de uma pasta `/_components` da própria rota (ex: `app/.../_components`).
+- Para ações server específicas de uma página/rota, **SEMPRE** criar um arquivo `/_actions.ts` na própria rota e acionar essas actions a partir dos componentes.
+- Componentes reutilizáveis/globalmente compartilhados devem continuar na pasta `components/`.
 - Antes de criar um novo componente, **SEMPRE** use Context7 para verificar se já existe um componente shadcn/ui equivalente. Se existir, instale-o.
 - **SEMPRE** use o componente `Button` do shadcn/ui (`@/components/ui/button`) para botões. **NUNCA** use `<button>` nativo.
 - **SEMPRE** veja os componentes reutilizáveis em `@components/ui/page.tsx` antes de construir páginas.

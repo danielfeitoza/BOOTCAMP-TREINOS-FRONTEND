@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Calendar, Timer, Dumbbell } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -23,6 +24,8 @@ function formatDuration(seconds: number): string {
 }
 
 interface WorkoutDayCardProps {
+  workoutPlanId: string;
+  workoutDayId: string;
   name: string;
   weekDay: string;
   estimatedDurationInSeconds: number;
@@ -32,6 +35,8 @@ interface WorkoutDayCardProps {
 }
 
 export function WorkoutDayCard({
+  workoutPlanId,
+  workoutDayId,
   name,
   weekDay,
   estimatedDurationInSeconds,
@@ -40,7 +45,8 @@ export function WorkoutDayCard({
   className,
 }: WorkoutDayCardProps) {
   return (
-    <div
+    <Link
+      href={`/workout-plans/${workoutPlanId}/days/${workoutDayId}?workoutPlanId=${workoutPlanId}&workoutDayId=${workoutDayId}`}
       className={cn(
         "relative flex h-50 flex-col items-start justify-between overflow-hidden rounded-xl p-5",
         className,
@@ -84,6 +90,6 @@ export function WorkoutDayCard({
           </span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
