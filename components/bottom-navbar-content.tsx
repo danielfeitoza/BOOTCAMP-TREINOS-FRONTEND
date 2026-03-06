@@ -32,7 +32,7 @@ const NAV_ITEMS: {
   },
   { icon: Sparkles, href: "#", label: "AI", isCenter: true },
   { icon: ChartNoAxesColumn, href: "/stats", label: "Estatísticas" },
-  { icon: UserRound, href: "#", label: "Perfil" },
+  { icon: UserRound, href: "/profile", label: "Perfil" },
 ];
 
 export function BottomNavbarContent({ agendaHref }: BottomNavbarContentProps) {
