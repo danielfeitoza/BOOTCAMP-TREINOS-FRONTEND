@@ -8,8 +8,8 @@ export async function BottomNavbar() {
   const response = await getHomeData(dayjs().format("YYYY-MM-DD"));
 
   const agendaHref =
-    response.status === 200 && response.data.todayWorkoutDay
-      ? `/workout-plans/${response.data.todayWorkoutDay.workoutPlanId}/days/${response.data.todayWorkoutDay.id}?workoutPlanId=${response.data.todayWorkoutDay.workoutPlanId}&workoutDayId=${response.data.todayWorkoutDay.id}`
+    response.status === 200 && response.data.activeWorkoutPlanId
+      ? `/workout-plans/${response.data.activeWorkoutPlanId}`
       : "/";
 
   return <BottomNavbarContent agendaHref={agendaHref} />;

@@ -21,14 +21,14 @@ const NAV_ITEMS: {
   href: string;
   label: string;
   isCenter?: boolean;
-  isWorkoutDayRoute?: boolean;
+  isWorkoutPlanRoute?: boolean;
 }[] = [
   { icon: House, href: "/", label: "Home" },
   {
     icon: Calendar,
     href: "",
     label: "Agenda",
-    isWorkoutDayRoute: true,
+    isWorkoutPlanRoute: true,
   },
   { icon: Sparkles, href: "#", label: "AI", isCenter: true },
   { icon: ChartNoAxesColumn, href: "#", label: "Estatísticas" },
@@ -41,11 +41,10 @@ export function BottomNavbarContent({ agendaHref }: BottomNavbarContentProps) {
   return (
     <nav className="fixed bottom-0 left-0 z-50 flex w-full items-center justify-center gap-6 rounded-t-4xl border-t border-border bg-card px-6 py-4">
       {NAV_ITEMS.map((item) => {
-        const href = item.isWorkoutDayRoute ? agendaHref : item.href;
-        const isWorkoutDayPath =
-          pathname.startsWith("/workout-plans/") && pathname.includes("/days/");
-        const isActive = item.isWorkoutDayRoute
-          ? isWorkoutDayPath
+        const href = item.isWorkoutPlanRoute ? agendaHref : item.href;
+        const isWorkoutPlanPath = pathname.startsWith("/workout-plans/");
+        const isActive = item.isWorkoutPlanRoute
+          ? isWorkoutPlanPath
           : pathname === href;
 
         if (item.isCenter) {
