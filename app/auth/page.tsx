@@ -6,7 +6,7 @@ import { useState } from "react";
 
 import { GoogleIcon } from "@/components/google-icon";
 import { Button } from "@/components/ui/button";
-import { authClient } from "@/_lib/auth-client";
+import { authClient } from "@/app/_lib/auth-client";
 
 export default function AuthPage() {
   const router = useRouter();
