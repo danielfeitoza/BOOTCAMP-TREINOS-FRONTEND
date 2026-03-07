@@ -9,8 +9,13 @@ import {
   ChartNoAxesColumn,
   UserRound,
 } from "lucide-react";
+import { parseAsBoolean, parseAsString, useQueryStates } from "nuqs";
 
 import { Button } from "@/components/ui/button";
+import {
+  CHAT_INITIAL_MESSAGE_QUERY_KEY,
+  CHAT_OPEN_QUERY_KEY,
+} from "@/lib/chatbot-url";
 
 type BottomNavbarContentProps = {
   agendaHref: string;
@@ -37,6 +42,18 @@ const NAV_ITEMS: {
 
 export function BottomNavbarContent({ agendaHref }: BottomNavbarContentProps) {
   const pathname = usePathname();
+  const [, setChatState] = useQueryStates(
+    {
+      chatOpen: parseAsBoolean.withDefault(false),
+      chatInitialMessage: parseAsString,
+    },
+    {
+      urlKeys: {
+        chatOpen: CHAT_OPEN_QUERY_KEY,
+        chatInitialMessage: CHAT_INITIAL_MESSAGE_QUERY_KEY,
+      },
+    },
+  );
 
   return (
     <nav className="fixed bottom-0 left-0 z-50 flex w-full items-center justify-center gap-6 rounded-t-4xl border-t border-border bg-card px-6 py-4">
@@ -51,10 +68,17 @@ export function BottomNavbarContent({ agendaHref }: BottomNavbarContentProps) {
           return (
             <Button
               key={item.label}
+              type="button"
               variant="default"
               size="icon-lg"
               className="rounded-full"
               aria-label={item.label}
+              onClick={() =>
+                setChatState({
+                  chatOpen: true,
+                  chatInitialMessage: null,
+                })
+              }
             >
               <item.icon className="size-6" />
             </Button>

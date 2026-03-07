@@ -1,4 +1,5 @@
-﻿import Image from "next/image";
+import Image from "next/image";
+import Link from "next/link";
 import { headers } from "next/headers";
 import { notFound, redirect } from "next/navigation";
 import { Calendar, CircleHelp, Clock3, Dumbbell } from "lucide-react";
@@ -12,6 +13,10 @@ import { BackButton } from "@/components/back-button";
 import { BottomNavbar } from "@/components/bottom-navbar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import {
+  buildOpenChatHref,
+  getExerciseHelpMessage,
+} from "@/lib/chatbot-url";
 
 import { CompleteWorkoutButton } from "./_components/complete-workout-button";
 import { StartWorkoutButton } from "./_components/start-workout-button";
@@ -203,8 +208,16 @@ export default async function WorkoutDayPage({
                 size="icon-sm"
                 className="rounded-full text-muted-foreground"
                 aria-label={`Detalhes de ${exercise.name}`}
+                asChild
               >
-                <CircleHelp className="size-4.5" />
+                <Link
+                  href={buildOpenChatHref(
+                    `/workout-plans/${workoutPlanId}/days/${workoutDayId}`,
+                    getExerciseHelpMessage(exercise.name),
+                  )}
+                >
+                  <CircleHelp className="size-4.5" />
+                </Link>
               </Button>
             </div>
           ))}
