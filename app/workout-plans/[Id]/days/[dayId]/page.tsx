@@ -5,6 +5,7 @@ import { notFound, redirect } from "next/navigation";
 import { Calendar, CircleHelp, Clock3, Dumbbell } from "lucide-react";
 
 import { authClient } from "@/app/_lib/auth-client";
+import { ensureOnboarding } from "@/app/_lib/ensure-onboarding";
 import {
   getWorkoutDay,
   type GetWorkoutDay200,
@@ -88,6 +89,9 @@ export default async function WorkoutDayPage({
   }
 
   const resolvedParams = await params;
+  await ensureOnboarding({
+    pathname: `/workout-plans/${resolvedParams.Id}/days/${resolvedParams.dayId}`,
+  });
   const resolvedSearchParams = await searchParams;
 
   const queryWorkoutPlanId = getSingleValue(resolvedSearchParams.workoutPlanId);

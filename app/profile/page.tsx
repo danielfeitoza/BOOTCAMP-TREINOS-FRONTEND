@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { BicepsFlexed, Ruler, User, Weight } from "lucide-react";
 
 import { authClient } from "@/app/_lib/auth-client";
+import { ensureOnboarding } from "@/app/_lib/ensure-onboarding";
 import { getMe } from "@/app/_lib/api/fetch-generated";
 import { BottomNavbar } from "@/components/bottom-navbar";
 
@@ -52,6 +53,8 @@ export default async function ProfilePage() {
   if (!session.data?.user) {
     redirect("/auth");
   }
+
+  await ensureOnboarding({ pathname: "/profile" });
 
   const profileResponse = await getMe();
 

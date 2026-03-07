@@ -1,4 +1,5 @@
 import { authClient } from "@/app/_lib/auth-client";
+import { ensureOnboarding } from "@/app/_lib/ensure-onboarding";
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
 import {
@@ -32,6 +33,8 @@ export default async function Home() {
   });
 
   if (!session.data?.user) redirect("/auth");
+
+  await ensureOnboarding({ pathname: "/" });
 
   const data = await fetchHomeData();
   const firstName = session.data.user.name?.split(" ")[0] ?? "";

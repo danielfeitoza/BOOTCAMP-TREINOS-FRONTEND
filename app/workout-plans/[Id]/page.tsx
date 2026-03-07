@@ -2,6 +2,7 @@
 import { notFound, redirect } from "next/navigation";
 
 import { authClient } from "@/app/_lib/auth-client";
+import { ensureOnboarding } from "@/app/_lib/ensure-onboarding";
 import { getWorkoutPlan } from "@/app/_lib/api/fetch-generated";
 import { BottomNavbar } from "@/components/bottom-navbar";
 
@@ -35,6 +36,7 @@ export default async function WorkoutPlanPage({ params }: PageProps) {
   }
 
   const resolvedParams = await params;
+  await ensureOnboarding({ pathname: `/workout-plans/${resolvedParams.Id}` });
 
   const response = await getWorkoutPlan(resolvedParams.Id);
 

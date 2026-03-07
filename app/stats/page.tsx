@@ -3,6 +3,7 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { authClient } from "@/app/_lib/auth-client";
+import { ensureOnboarding } from "@/app/_lib/ensure-onboarding";
 import { getStats } from "@/app/_lib/api/fetch-generated";
 import { BottomNavbar } from "@/components/bottom-navbar";
 
@@ -20,6 +21,8 @@ export default async function StatsPage() {
   if (!session.data?.user) {
     redirect("/auth");
   }
+
+  await ensureOnboarding({ pathname: "/stats" });
 
   const from = dayjs().subtract(2, "month").startOf("month").format("YYYY-MM-DD");
   const to = dayjs().endOf("month").format("YYYY-MM-DD");
