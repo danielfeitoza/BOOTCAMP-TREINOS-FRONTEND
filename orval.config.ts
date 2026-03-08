@@ -22,11 +22,11 @@ export default defineConfig({
 //     },
 //   },
   fetch: {
-    input: `${process.env.NEXT_PUBLIC_API_URL}/swagger.json`,
+    input: "http://localhost:8080/swagger.json",
     output: {
       target: "./app/_lib/api/fetch-generated/index.ts",
       client: "fetch",
-      prettier: true,
+      prettier: false,
       override: {
         mutator: {
           path: "./app/_lib/fetch.ts",

@@ -1,7 +1,7 @@
-import dayjs from "dayjs";
 import { redirect } from "next/navigation";
 
 import { getHomeData, getMe } from "@/app/_lib/api/fetch-generated";
+import { getTodayInAppTimezone } from "@/app/_lib/date";
 
 type EnsureOnboardingOptions = {
   pathname: string;
@@ -9,7 +9,7 @@ type EnsureOnboardingOptions = {
 
 export async function ensureOnboarding({ pathname }: EnsureOnboardingOptions) {
   const [homeResponse, trainDataResponse] = await Promise.all([
-    getHomeData(dayjs().format("YYYY-MM-DD")),
+    getHomeData(getTodayInAppTimezone()),
     getMe(),
   ]);
 

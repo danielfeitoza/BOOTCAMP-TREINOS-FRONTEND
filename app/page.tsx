@@ -1,12 +1,12 @@
 import { authClient } from "@/app/_lib/auth-client";
 import { ensureOnboarding } from "@/app/_lib/ensure-onboarding";
+import { getTodayInAppTimezone } from "@/app/_lib/date";
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
 import {
   getHomeData,
   type GetHomeData200,
 } from "./_lib/api/fetch-generated";
-import dayjs from "dayjs";
 import Image from "next/image";
 
 import { BottomNavbar } from "@/components/bottom-navbar";
@@ -17,7 +17,7 @@ import { Button } from "@/components/ui/button";
 
 async function fetchHomeData(): Promise<GetHomeData200 | null> {
   try {
-    const response = await getHomeData(dayjs().format("YYYY-MM-DD"));
+    const response = await getHomeData(getTodayInAppTimezone());
     if (response.status !== 200) return null;
     return response.data;
   } catch {
