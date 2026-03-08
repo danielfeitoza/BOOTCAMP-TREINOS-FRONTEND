@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Geist, Geist_Mono, Inter_Tight } from "next/font/google";
 import "./globals.css";
-import { GlobalChatbot } from "@/components/global-chatbot";
+import { AuthenticatedChatbot } from "@/components/authenticated-chatbot";
 import { NuqsProvider } from "@/components/nuqs-provider";
 
 const geistSans = Geist({
@@ -34,10 +35,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${interTight.variable} antialiased`}
       >
-        <NuqsProvider>
-          {children}
-          <GlobalChatbot />
-        </NuqsProvider>
+        <Suspense fallback={null}>
+          <NuqsProvider>
+            {children}
+            <AuthenticatedChatbot />
+          </NuqsProvider>
+        </Suspense>
       </body>
     </html>
   );
