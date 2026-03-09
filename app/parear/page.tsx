@@ -77,10 +77,7 @@ export default async function PairPage({ searchParams }: PairPageProps) {
     redirect(`/auth?returnTo=${encodeURIComponent(returnTo)}`);
   }
 
-  const hasValidDeviceCode = Boolean(deviceCode && UUID_REGEX.test(deviceCode));
-  const hasValidDeviceName = Boolean(deviceName);
-
-  if (!hasValidDeviceCode || !hasValidDeviceName) {
+  if (!deviceCode || !UUID_REGEX.test(deviceCode) || !deviceName) {
     return (
       <div className="flex min-h-svh flex-col items-center justify-center bg-background px-5">
         <div className="flex w-full max-w-md flex-col items-center gap-4 rounded-2xl border border-border bg-card p-6 text-center">
