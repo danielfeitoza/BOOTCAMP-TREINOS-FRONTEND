@@ -6,15 +6,23 @@ import { authClient } from "@/app/_lib/auth-client";
 import { GoogleIcon } from "@/components/google-icon";
 import { Button } from "@/components/ui/button";
 
-export function GoogleLoginButton() {
+type GoogleLoginButtonProps = {
+  callbackPath?: string;
+};
+
+export function GoogleLoginButton({ callbackPath }: GoogleLoginButtonProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleGoogleLogin = async () => {
     setIsLoading(true);
 
+    const callbackURL = callbackPath
+      ? `${process.env.NEXT_PUBLIC_BASE_URL}${callbackPath}`
+      : `${process.env.NEXT_PUBLIC_BASE_URL}`;
+
     const { error } = await authClient.signIn.social({
       provider: "google",
-      callbackURL: `${process.env.NEXT_PUBLIC_BASE_URL}`,
+      callbackURL,
     });
 
     if (error) {

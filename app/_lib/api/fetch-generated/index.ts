@@ -459,6 +459,185 @@ export type UpsertUserTimezone500 = {
   code: string;
 };
 
+export type PairSmartwatchBody = {
+  /** @pattern ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$ */
+  deviceCode: string;
+  /**
+   * @minLength 1
+   * @maxLength 120
+   */
+  deviceName: string;
+};
+
+export type PairSmartwatch200 = {
+  /** @pattern ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$ */
+  id: string;
+  userId: string;
+  /** @pattern ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$ */
+  deviceCode: string;
+  deviceName: string;
+};
+
+export type PairSmartwatch401 = {
+  error: string;
+  code: string;
+};
+
+export type PairSmartwatch409 = {
+  error: string;
+  code: string;
+};
+
+export type PairSmartwatch500 = {
+  error: string;
+  code: string;
+};
+
+/**
+ * @nullable
+ */
+export type GetSmartwatch200 = {
+  /** @pattern ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12} | 00000000-0000-0000-0000-000000000000 | ffffffff-ffff-ffff-ffff-ffffffffffff)$ */
+  id: string;
+  userId: string;
+  /** @pattern ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12} | ffffffff-ffff-ffff-ffff-ffffffffffff)$ */
+  deviceCode: string;
+  deviceName: string;
+} | null;
+
+export type GetSmartwatch401 = {
+  error: string;
+  code: string;
+};
+
+export type GetSmartwatch500 = {
+  error: string;
+  code: string;
+};
+
+export type DeleteSmartwatch200 = {
+  /** @pattern ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$ */
+  id: string;
+  userId: string;
+};
+
+export type DeleteSmartwatch401 = {
+  error: string;
+  code: string;
+};
+
+export type DeleteSmartwatch404 = {
+  error: string;
+  code: string;
+};
+
+export type DeleteSmartwatch500 = {
+  error: string;
+  code: string;
+};
+
+export type GetWatchTodayWorkoutParams = {
+/**
+ * @pattern ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+ */
+deviceCode: string;
+};
+
+export type GetWatchTodayWorkout200ExercisesItem = {
+  /** @pattern ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$ */
+  id: string;
+  name: string;
+  order: number;
+  sets: number;
+  reps: number;
+  restTimeInSeconds: number;
+};
+
+export type GetWatchTodayWorkout200 = {
+  /** @pattern ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$ */
+  workoutPlanId: string;
+  /** @pattern ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$ */
+  workoutDayId: string;
+  workoutDayName: string;
+  weekDay: string;
+  isRest: boolean;
+  exercises: GetWatchTodayWorkout200ExercisesItem[];
+};
+
+export type GetWatchTodayWorkout404 = {
+  error: string;
+  code: string;
+};
+
+export type GetWatchTodayWorkout500 = {
+  error: string;
+  code: string;
+};
+
+export type StartWatchWorkoutSessionBody = {
+  /** @pattern ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$ */
+  deviceCode: string;
+  /** @pattern ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$ */
+  workoutPlanId: string;
+  /** @pattern ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$ */
+  workoutDayId: string;
+};
+
+export type StartWatchWorkoutSession201 = {
+  /** @pattern ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$ */
+  userWorkoutSessionId: string;
+};
+
+export type StartWatchWorkoutSession404 = {
+  error: string;
+  code: string;
+};
+
+export type StartWatchWorkoutSession409 = {
+  error: string;
+  code: string;
+};
+
+export type StartWatchWorkoutSession422 = {
+  error: string;
+  code: string;
+};
+
+export type StartWatchWorkoutSession500 = {
+  error: string;
+  code: string;
+};
+
+export type CompleteWatchWorkoutSessionBody = {
+  /** @pattern ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$ */
+  deviceCode: string;
+  /** @pattern ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$ */
+  workoutPlanId: string;
+  /** @pattern ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$ */
+  workoutDayId: string;
+  /** @pattern ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$ */
+  completedAt: string;
+};
+
+export type CompleteWatchWorkoutSession200 = {
+  /** @pattern ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$ */
+  id: string;
+  /** @pattern ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$ */
+  completedAt: string;
+  /** @pattern ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$ */
+  startedAt: string;
+};
+
+export type CompleteWatchWorkoutSession404 = {
+  error: string;
+  code: string;
+};
+
+export type CompleteWatchWorkoutSession500 = {
+  error: string;
+  code: string;
+};
+
 export type Get200 = {
   message: string;
 };
@@ -1058,6 +1237,327 @@ export const upsertUserTimezone = async (upsertUserTimezoneBody: UpsertUserTimez
     headers: { 'Content-Type': 'application/json', ...options?.headers },
     body: JSON.stringify(
       upsertUserTimezoneBody,)
+  }
+);}
+
+
+
+/**
+ * @summary Create or update smartwatch pairing for the authenticated user
+ */
+export type pairSmartwatchResponse200 = {
+  data: PairSmartwatch200
+  status: 200
+}
+
+export type pairSmartwatchResponse401 = {
+  data: PairSmartwatch401
+  status: 401
+}
+
+export type pairSmartwatchResponse409 = {
+  data: PairSmartwatch409
+  status: 409
+}
+
+export type pairSmartwatchResponse500 = {
+  data: PairSmartwatch500
+  status: 500
+}
+    
+export type pairSmartwatchResponseSuccess = (pairSmartwatchResponse200) & {
+  headers: Headers;
+};
+export type pairSmartwatchResponseError = (pairSmartwatchResponse401 | pairSmartwatchResponse409 | pairSmartwatchResponse500) & {
+  headers: Headers;
+};
+
+export type pairSmartwatchResponse = (pairSmartwatchResponseSuccess | pairSmartwatchResponseError)
+
+export const getPairSmartwatchUrl = () => {
+
+
+  
+
+  return `/smartwatch/pair`
+}
+
+export const pairSmartwatch = async (pairSmartwatchBody: PairSmartwatchBody, options?: RequestInit): Promise<pairSmartwatchResponse> => {
+  
+  return customFetch<pairSmartwatchResponse>(getPairSmartwatchUrl(),
+  {      
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      pairSmartwatchBody,)
+  }
+);}
+
+
+
+/**
+ * @summary Get smartwatch pairing for the authenticated user
+ */
+export type getSmartwatchResponse200 = {
+  data: GetSmartwatch200
+  status: 200
+}
+
+export type getSmartwatchResponse401 = {
+  data: GetSmartwatch401
+  status: 401
+}
+
+export type getSmartwatchResponse500 = {
+  data: GetSmartwatch500
+  status: 500
+}
+    
+export type getSmartwatchResponseSuccess = (getSmartwatchResponse200) & {
+  headers: Headers;
+};
+export type getSmartwatchResponseError = (getSmartwatchResponse401 | getSmartwatchResponse500) & {
+  headers: Headers;
+};
+
+export type getSmartwatchResponse = (getSmartwatchResponseSuccess | getSmartwatchResponseError)
+
+export const getGetSmartwatchUrl = () => {
+
+
+  
+
+  return `/smartwatch/`
+}
+
+export const getSmartwatch = async ( options?: RequestInit): Promise<getSmartwatchResponse> => {
+  
+  return customFetch<getSmartwatchResponse>(getGetSmartwatchUrl(),
+  {      
+    ...options,
+    method: 'GET'
+    
+    
+  }
+);}
+
+
+
+/**
+ * @summary Delete smartwatch pairing for the authenticated user
+ */
+export type deleteSmartwatchResponse200 = {
+  data: DeleteSmartwatch200
+  status: 200
+}
+
+export type deleteSmartwatchResponse401 = {
+  data: DeleteSmartwatch401
+  status: 401
+}
+
+export type deleteSmartwatchResponse404 = {
+  data: DeleteSmartwatch404
+  status: 404
+}
+
+export type deleteSmartwatchResponse500 = {
+  data: DeleteSmartwatch500
+  status: 500
+}
+    
+export type deleteSmartwatchResponseSuccess = (deleteSmartwatchResponse200) & {
+  headers: Headers;
+};
+export type deleteSmartwatchResponseError = (deleteSmartwatchResponse401 | deleteSmartwatchResponse404 | deleteSmartwatchResponse500) & {
+  headers: Headers;
+};
+
+export type deleteSmartwatchResponse = (deleteSmartwatchResponseSuccess | deleteSmartwatchResponseError)
+
+export const getDeleteSmartwatchUrl = () => {
+
+
+  
+
+  return `/smartwatch/`
+}
+
+export const deleteSmartwatch = async ( options?: RequestInit): Promise<deleteSmartwatchResponse> => {
+  
+  return customFetch<deleteSmartwatchResponse>(getDeleteSmartwatchUrl(),
+  {      
+    ...options,
+    method: 'DELETE'
+    
+    
+  }
+);}
+
+
+
+/**
+ * @summary Get active plan workout for a specific date using device code
+ */
+export type getWatchTodayWorkoutResponse200 = {
+  data: GetWatchTodayWorkout200
+  status: 200
+}
+
+export type getWatchTodayWorkoutResponse404 = {
+  data: GetWatchTodayWorkout404
+  status: 404
+}
+
+export type getWatchTodayWorkoutResponse500 = {
+  data: GetWatchTodayWorkout500
+  status: 500
+}
+    
+export type getWatchTodayWorkoutResponseSuccess = (getWatchTodayWorkoutResponse200) & {
+  headers: Headers;
+};
+export type getWatchTodayWorkoutResponseError = (getWatchTodayWorkoutResponse404 | getWatchTodayWorkoutResponse500) & {
+  headers: Headers;
+};
+
+export type getWatchTodayWorkoutResponse = (getWatchTodayWorkoutResponseSuccess | getWatchTodayWorkoutResponseError)
+
+export const getGetWatchTodayWorkoutUrl = (date: string,
+    params: GetWatchTodayWorkoutParams,) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+    
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? 'null' : value.toString())
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0 ? `/watch/today/${date}?${stringifiedParams}` : `/watch/today/${date}`
+}
+
+export const getWatchTodayWorkout = async (date: string,
+    params: GetWatchTodayWorkoutParams, options?: RequestInit): Promise<getWatchTodayWorkoutResponse> => {
+  
+  return customFetch<getWatchTodayWorkoutResponse>(getGetWatchTodayWorkoutUrl(date,params),
+  {      
+    ...options,
+    method: 'GET'
+    
+    
+  }
+);}
+
+
+
+/**
+ * @summary Start workout session using smartwatch device code
+ */
+export type startWatchWorkoutSessionResponse201 = {
+  data: StartWatchWorkoutSession201
+  status: 201
+}
+
+export type startWatchWorkoutSessionResponse404 = {
+  data: StartWatchWorkoutSession404
+  status: 404
+}
+
+export type startWatchWorkoutSessionResponse409 = {
+  data: StartWatchWorkoutSession409
+  status: 409
+}
+
+export type startWatchWorkoutSessionResponse422 = {
+  data: StartWatchWorkoutSession422
+  status: 422
+}
+
+export type startWatchWorkoutSessionResponse500 = {
+  data: StartWatchWorkoutSession500
+  status: 500
+}
+    
+export type startWatchWorkoutSessionResponseSuccess = (startWatchWorkoutSessionResponse201) & {
+  headers: Headers;
+};
+export type startWatchWorkoutSessionResponseError = (startWatchWorkoutSessionResponse404 | startWatchWorkoutSessionResponse409 | startWatchWorkoutSessionResponse422 | startWatchWorkoutSessionResponse500) & {
+  headers: Headers;
+};
+
+export type startWatchWorkoutSessionResponse = (startWatchWorkoutSessionResponseSuccess | startWatchWorkoutSessionResponseError)
+
+export const getStartWatchWorkoutSessionUrl = () => {
+
+
+  
+
+  return `/watch/sessions/start`
+}
+
+export const startWatchWorkoutSession = async (startWatchWorkoutSessionBody: StartWatchWorkoutSessionBody, options?: RequestInit): Promise<startWatchWorkoutSessionResponse> => {
+  
+  return customFetch<startWatchWorkoutSessionResponse>(getStartWatchWorkoutSessionUrl(),
+  {      
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      startWatchWorkoutSessionBody,)
+  }
+);}
+
+
+
+/**
+ * @summary Complete workout session using smartwatch device code
+ */
+export type completeWatchWorkoutSessionResponse200 = {
+  data: CompleteWatchWorkoutSession200
+  status: 200
+}
+
+export type completeWatchWorkoutSessionResponse404 = {
+  data: CompleteWatchWorkoutSession404
+  status: 404
+}
+
+export type completeWatchWorkoutSessionResponse500 = {
+  data: CompleteWatchWorkoutSession500
+  status: 500
+}
+    
+export type completeWatchWorkoutSessionResponseSuccess = (completeWatchWorkoutSessionResponse200) & {
+  headers: Headers;
+};
+export type completeWatchWorkoutSessionResponseError = (completeWatchWorkoutSessionResponse404 | completeWatchWorkoutSessionResponse500) & {
+  headers: Headers;
+};
+
+export type completeWatchWorkoutSessionResponse = (completeWatchWorkoutSessionResponseSuccess | completeWatchWorkoutSessionResponseError)
+
+export const getCompleteWatchWorkoutSessionUrl = (sessionId: string,) => {
+
+
+  
+
+  return `/watch/sessions/${sessionId}/finish`
+}
+
+export const completeWatchWorkoutSession = async (sessionId: string,
+    completeWatchWorkoutSessionBody: CompleteWatchWorkoutSessionBody, options?: RequestInit): Promise<completeWatchWorkoutSessionResponse> => {
+  
+  return customFetch<completeWatchWorkoutSessionResponse>(getCompleteWatchWorkoutSessionUrl(sessionId),
+  {      
+    ...options,
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      completeWatchWorkoutSessionBody,)
   }
 );}
 

@@ -6,7 +6,33 @@ import { authClient } from "@/app/_lib/auth-client";
 
 import { GoogleLoginButton } from "./_components/google-login-button";
 
-export default async function AuthPage() {
+type AuthPageProps = {
+  searchParams: Promise<{
+    returnTo?: string | string[];
+  }>;
+};
+
+function getSingleValue(value?: string | string[]): string | undefined {
+  if (Array.isArray(value)) {
+    return value[0];
+  }
+
+  return value;
+}
+
+function getSafeReturnToPath(returnTo?: string): string | undefined {
+  if (!returnTo) {
+    return undefined;
+  }
+
+  if (!returnTo.startsWith("/") || returnTo.startsWith("//")) {
+    return undefined;
+  }
+
+  return returnTo;
+}
+
+export default async function AuthPage({ searchParams }: AuthPageProps) {
   const session = await authClient.getSession({
     fetchOptions: {
       headers: await headers(),
@@ -16,6 +42,11 @@ export default async function AuthPage() {
   if (session.data?.user) {
     redirect("/");
   }
+
+  const resolvedSearchParams = await searchParams;
+  const returnTo = getSafeReturnToPath(
+    getSingleValue(resolvedSearchParams.returnTo),
+  );
 
   return (
     <div className="relative flex h-svh w-full flex-col">
@@ -45,7 +76,7 @@ export default async function AuthPage() {
           <h1 className="w-full text-center font-heading text-[32px] font-semibold leading-[1.05] text-primary-foreground">
             O app que vai transformar a forma como você treina.
           </h1>
-          <GoogleLoginButton />
+          <GoogleLoginButton callbackPath={returnTo} />
         </div>
         <p className="text-xs text-primary-foreground/70">
           ©2026 Copyright FIT.AI. Todos os direitos reservados
