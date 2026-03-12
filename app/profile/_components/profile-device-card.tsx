@@ -47,12 +47,12 @@ export function ProfileDeviceCard({ deviceName }: ProfileDeviceCardProps) {
       <div className="col-span-2 flex flex-col items-center gap-4 rounded-xl bg-primary/8 p-5 text-center">
         <div className="flex items-center justify-center gap-3 text-primary">
           <Watch className="size-8" />
-          <p className="font-heading text-4xl leading-[1.1] font-semibold text-foreground">
+          <p className="font-heading text-[22px] leading-[1.1] font-semibold text-foreground">
             Dispositivo vinculado
           </p>
         </div>
 
-        <p className="font-heading text-2xl leading-[1.2] font-semibold text-foreground">
+        <p className="font-heading text-[16px] leading-[1.2] font-semibold text-foreground">
           {currentDeviceName ?? "Não existe dispositivo vinculado"}
         </p>
 
