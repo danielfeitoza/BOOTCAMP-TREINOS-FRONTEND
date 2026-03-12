@@ -5,9 +5,10 @@ import { BicepsFlexed, Ruler, User, Weight } from "lucide-react";
 
 import { authClient } from "@/app/_lib/auth-client";
 import { ensureOnboarding } from "@/app/_lib/ensure-onboarding";
-import { getMe } from "@/app/_lib/api/fetch-generated";
+import { getMe, getSmartwatch } from "@/app/_lib/api/fetch-generated";
 import { BottomNavbar } from "@/components/bottom-navbar";
 
+import { ProfileDeviceCard } from "./_components/profile-device-card";
 import { ProfileLogoutButton } from "./_components/profile-logout-button";
 import { ProfileMetricCard } from "./_components/profile-metric-card";
 
@@ -56,13 +57,14 @@ export default async function ProfilePage() {
 
   await ensureOnboarding({ pathname: "/profile" });
 
-  const profileResponse = await getMe();
+  const [profileResponse, smartwatchResponse] = await Promise.all([getMe(), getSmartwatch()]);
 
-  if (profileResponse.status === 401) {
+  if (profileResponse.status === 401 || smartwatchResponse.status === 401) {
     redirect("/auth");
   }
 
   const profileData = profileResponse.status === 200 ? profileResponse.data : null;
+  const smartwatchData = smartwatchResponse.status === 200 ? smartwatchResponse.data : null;
   const userName = session.data.user.name ?? "Usuário";
 
   return (
@@ -116,6 +118,7 @@ export default async function ProfilePage() {
             label="GC"
           />
           <ProfileMetricCard icon={User} value={formatAge(profileData?.age)} label="ANOS" />
+          <ProfileDeviceCard deviceName={smartwatchData?.deviceName ?? null} />
         </div>
 
         <div className="flex justify-center">

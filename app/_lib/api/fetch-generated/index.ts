@@ -536,6 +536,65 @@ export type DeleteSmartwatch500 = {
   code: string;
 };
 
+export type GetWatchUserIdByDeviceCodeParams = {
+/**
+ * @pattern ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+ */
+deviceCode: string;
+};
+
+export type GetWatchUserIdByDeviceCode200 = {
+  userId: string | 0;
+};
+
+export type GetWatchUserIdByDeviceCode500 = {
+  error: string;
+  code: string;
+};
+
+export type GetWatchActiveSessionParams = {
+/**
+ * @minLength 1
+ */
+userId: string;
+};
+
+export type Item = {
+  /** @pattern ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$ */
+  id: string;
+  name: string;
+  order: number;
+  sets: number;
+  reps: number;
+  restTimeInSeconds: number;
+};
+
+export type GetWatchActiveSession200 = {
+  active: boolean;
+} | {
+  active: boolean;
+  /** @pattern ^(?:(?:\d\d[2468][048] | \d\d[13579][26] | \d\d0[48] | [02468][048]00 | [13579][26]00)-02-29 | \d{4}-(?:(?:0[13578] | 1[02])-(?:0[1-9] | [12]\d | 3[01]) | (?:0[469] | 11)-(?:0[1-9] | 30) | (?:02)-(?:0[1-9] | 1\d | 2[0-8])))T(?:(?:[01]\d | 2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$ */
+  startedAt: string;
+  /**
+   * @nullable
+   * @pattern ^(?:(?:\d\d[2468][048] | 2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+   */
+  completedAt: string | null;
+  /** @pattern ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12} | 00000000-0000-0000-0000-000000000000 | ffffffff-ffff-ffff-ffff-ffffffffffff)$ */
+  workoutPlanId: string;
+  /** @pattern ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12} | ffffffff-ffff-ffff-ffff-ffffffffffff)$ */
+  workoutDayId: string;
+  workoutDayName: string;
+  weekDay: string;
+  isRest: boolean;
+  exercises: Item[];
+};
+
+export type GetWatchActiveSession500 = {
+  error: string;
+  code: string;
+};
+
 export type GetWatchTodayWorkoutParams = {
 /**
  * @pattern ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
@@ -561,6 +620,11 @@ export type GetWatchTodayWorkout200 = {
   workoutDayName: string;
   weekDay: string;
   isRest: boolean;
+  /**
+   * @nullable
+   * @pattern ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+   */
+  completedAt: string | null;
   exercises: GetWatchTodayWorkout200ExercisesItem[];
 };
 
@@ -586,6 +650,13 @@ export type StartWatchWorkoutSessionBody = {
 export type StartWatchWorkoutSession201 = {
   /** @pattern ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$ */
   userWorkoutSessionId: string;
+  /** @pattern ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$ */
+  startedAt: string;
+  /**
+   * @nullable
+   * @pattern ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+   */
+  completedAt: string | null;
 };
 
 export type StartWatchWorkoutSession404 = {
@@ -1390,6 +1461,108 @@ export const deleteSmartwatch = async ( options?: RequestInit): Promise<deleteSm
   {      
     ...options,
     method: 'DELETE'
+    
+    
+  }
+);}
+
+
+
+/**
+ * @summary Get user id by smartwatch device code
+ */
+export type getWatchUserIdByDeviceCodeResponse200 = {
+  data: GetWatchUserIdByDeviceCode200
+  status: 200
+}
+
+export type getWatchUserIdByDeviceCodeResponse500 = {
+  data: GetWatchUserIdByDeviceCode500
+  status: 500
+}
+    
+export type getWatchUserIdByDeviceCodeResponseSuccess = (getWatchUserIdByDeviceCodeResponse200) & {
+  headers: Headers;
+};
+export type getWatchUserIdByDeviceCodeResponseError = (getWatchUserIdByDeviceCodeResponse500) & {
+  headers: Headers;
+};
+
+export type getWatchUserIdByDeviceCodeResponse = (getWatchUserIdByDeviceCodeResponseSuccess | getWatchUserIdByDeviceCodeResponseError)
+
+export const getGetWatchUserIdByDeviceCodeUrl = (params: GetWatchUserIdByDeviceCodeParams,) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+    
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? 'null' : value.toString())
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0 ? `/watch/user-id?${stringifiedParams}` : `/watch/user-id`
+}
+
+export const getWatchUserIdByDeviceCode = async (params: GetWatchUserIdByDeviceCodeParams, options?: RequestInit): Promise<getWatchUserIdByDeviceCodeResponse> => {
+  
+  return customFetch<getWatchUserIdByDeviceCodeResponse>(getGetWatchUserIdByDeviceCodeUrl(params),
+  {      
+    ...options,
+    method: 'GET'
+    
+    
+  }
+);}
+
+
+
+/**
+ * @summary Get active workout session for a user and date
+ */
+export type getWatchActiveSessionResponse200 = {
+  data: GetWatchActiveSession200
+  status: 200
+}
+
+export type getWatchActiveSessionResponse500 = {
+  data: GetWatchActiveSession500
+  status: 500
+}
+    
+export type getWatchActiveSessionResponseSuccess = (getWatchActiveSessionResponse200) & {
+  headers: Headers;
+};
+export type getWatchActiveSessionResponseError = (getWatchActiveSessionResponse500) & {
+  headers: Headers;
+};
+
+export type getWatchActiveSessionResponse = (getWatchActiveSessionResponseSuccess | getWatchActiveSessionResponseError)
+
+export const getGetWatchActiveSessionUrl = (date: string,
+    params: GetWatchActiveSessionParams,) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+    
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? 'null' : value.toString())
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0 ? `/watch/sessions/active/${date}?${stringifiedParams}` : `/watch/sessions/active/${date}`
+}
+
+export const getWatchActiveSession = async (date: string,
+    params: GetWatchActiveSessionParams, options?: RequestInit): Promise<getWatchActiveSessionResponse> => {
+  
+  return customFetch<getWatchActiveSessionResponse>(getGetWatchActiveSessionUrl(date,params),
+  {      
+    ...options,
+    method: 'GET'
     
     
   }
