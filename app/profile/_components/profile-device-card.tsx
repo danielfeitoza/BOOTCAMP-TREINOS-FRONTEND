@@ -4,8 +4,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Watch } from "lucide-react";
 
-import { deleteSmartwatch } from "@/app/_lib/api/fetch-generated";
-
 import { ProfileDeviceTutorialModal } from "./profile-device-tutorial-modal";
 import { ProfileDeviceUnlinkModal } from "./profile-device-unlink-modal";
 
@@ -25,7 +23,9 @@ export function ProfileDeviceCard({ deviceName }: ProfileDeviceCardProps) {
     setIsDeleting(true);
 
     try {
-      const response = await deleteSmartwatch();
+      const response = await fetch("/profile/smartwatch", {
+        method: "DELETE",
+      });
 
       if (response.status === 401) {
         router.push("/auth");
